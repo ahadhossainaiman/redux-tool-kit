@@ -1,10 +1,14 @@
-import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "./redux/store";
-import { decrement, increment } from "./redux/features/counter/counterSlice";
+import {
+  decrement,
+  increment,
+  incrementByAmount,
+} from "./redux/features/counter/counterSlice";
+import { useAppDispatch, useAppSelector } from "./redux/hooks";
 
 function App() {
-  const count = useSelector((state: RootState) => state.counter.count);
-  const dispatch = useDispatch();
+  const count = useAppSelector((state) => state.counter.count);
+  const dispatch = useAppDispatch();
   return (
     <div className="grid place-content-center">
       <div className="flex">
@@ -13,6 +17,12 @@ function App() {
           className="px-5 py-3 border-2 border-lime-600"
         >
           increment
+        </button>
+        <button
+          onClick={() => dispatch(incrementByAmount(5))}
+          className="px-5 py-3 border-2 border-lime-600"
+        >
+          incrementByFive
         </button>
         <div className="p-5">{count}</div>
         <button
